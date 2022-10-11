@@ -14,4 +14,4 @@ RUN curl "https://storage.googleapis.com/storage/v1/b/abb-textgen-models/o/dutch
 
 COPY . .
 
-CMD [ "uvicorn", "main:app", "--host", "0.0.0.0" ]
+CMD [ "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080" ]
