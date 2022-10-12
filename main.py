@@ -11,9 +11,9 @@ app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True, 
 
 
 class ModelName(str, Enum):
-    gpt2_retrain = "gpt2-retrain"
-    dutch_gpt_medium = "dutch-gpt-medium"
-    dutch_gpt_neo = "dutch-gpt-neo"
+    gpt2_retrain = "/models/gpt2-retrain"
+    dutch_gpt_medium = "/models/dutch-gpt-medium"
+    dutch_gpt_neo = "/models/dutch-gpt-neo"
 
 
 models = {model.split("/")[-1]: aitextgen(tokenizer_file=f"{model.value}/tokenizer.json", model_folder=model.value) for model in
