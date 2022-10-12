@@ -11,17 +11,17 @@ app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True, 
 
 
 class ModelName(str, Enum):
-    gpt2_retrain = "/models/gpt2-retrain"
-    dutch_gpt_medium = "/models/dutch-gpt-medium"
-    dutch_gpt_neo = "/models/dutch-gpt-neo"
+    gpt2_retrain = "gpt2-retrain"
+    dutch_gpt_medium = "dutch-gpt-medium"
+    dutch_gpt_neo = "dutch-gpt-neo"
 
 
-models = {model.split("/")[-1]: aitextgen(tokenizer_file=f"{model.value}/tokenizer.json", model_folder=model.value) for model in
+models = {model: aitextgen(tokenizer_file=f"/models/{model.value}/tokenizer.json", model_folder=f"/models/{model.value}") for model in
           ModelName}
 
 
 @app.get("/generate", response_model=list[str])
-async def generate(prompt: str, model: ModelName = "dutch_gpt_neo", n: int = 5, max_length: int = 64,
+async def generate(prompt: str, model: ModelName = "dutch-gpt-neo", n: int = 5, max_length: int = 64,
                    temperature: float = 0.7, early_stopping: bool = True):
     """
     Function that takes in a starting prompt and attempts to complete the sentence.
